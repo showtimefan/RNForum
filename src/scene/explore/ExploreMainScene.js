@@ -38,9 +38,7 @@ class ExploreMainScene extends React.Component {
                 selectedImage={require('../../img/tabbar/tab_explore_h.png')}
             />
         )
-    }
-
-    ;
+    };
 
     render() {
         return (

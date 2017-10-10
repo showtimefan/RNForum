@@ -10,8 +10,10 @@ import ExploreMainScene from './src/scene/explore/ExploreMainScene'
 import RecommendMainScene from './src/scene/recommend/RecommendMainScene'
 import ForumMainScene from './src/scene/forum/ForumMainScene'
 import WebViewPage from './src/components/WebViewPage'
+import LoginScene from './src/scene/Login/LoginScene'
 import { StackNavigator, TabNavigator } from 'react-navigation';
 import React, { Component } from 'react';
+import WebDataTest from './src/scene/Test/WebDataTest'
 import {
   AppRegistry,
   StyleSheet,
@@ -23,11 +25,10 @@ import {
 const TabContainer = TabNavigator(
     {
         Recommend: { screen: RecommendMainScene },
-        Pad: { screen: PadMainScene },
         Forum: { screen: ForumMainScene },
         Explore: { screen: ExploreMainScene },
-        Category: { screen: CategoryMainScene }
-
+        Category: { screen: CategoryMainScene },
+        TestWeb: {screen: WebDataTest}
     },
     {
         lazy: true,
@@ -48,25 +49,6 @@ const TabContainer = TabNavigator(
         }
     }
 );
-
-// export default class RNForum extends Component {
-//   render() {
-//     return (
-//       <View style={styles.container}>
-//         <Text style={styles.welcome}>
-//           Welcome to React Native!
-//         </Text>
-//         <Text style={styles.instructions}>
-//           To get started, edit index.ios.js
-//         </Text>
-//         <Text style={styles.instructions}>
-//           Press Cmd+R to reload,{'\n'}
-//           Cmd+D or shake for dev menu
-//         </Text>
-//       </View>
-//     );
-//   }
-// }
 
 const styles = StyleSheet.create({
   container: {
@@ -95,20 +77,21 @@ const RNForum = StackNavigator(
                 headerLeft: null
             }
         },
-        Web: { screen: WebViewPage }
-
+        Web: { screen: WebViewPage },
+        Login: { screen: LoginScene }
     },
     {
         headerMode: 'screen',
         navigationOptions: {
             headerStyle: {
-                backgroundColor: '#3e9ce9'
+                backgroundColor: '#FFF'
             },
             headerTitleStyle: {
-                color: '#fff',
+                color: '#000',
                 fontSize: 20
             },
-            headerTintColor: '#fff'
+            headerBackTitle:null,
+            headerTintColor: '#000'
         }
     }
 );

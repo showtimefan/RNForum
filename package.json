@@ -9,7 +9,9 @@
   "dependencies": {
     "react": "16.0.0-alpha.12",
     "react-native": "0.48.3",
+    "react-native-easy-toast": "^1.0.6",
     "react-native-scrollable-tab-view": "^0.6.7",
+    "react-native-storage": "^0.2.2",
     "react-navigation": "^1.0.0-beta.11"
   },
   "devDependencies": {

@@ -43,7 +43,7 @@ class RecommendMainScene extends React.Component {
 
     render() {
         return(
-            <RecommendListView/>
+            <RecommendListView navigation={this.props.navigation} />
         );
     }
 }

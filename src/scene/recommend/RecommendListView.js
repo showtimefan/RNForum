@@ -3,7 +3,8 @@ import {View, StyleSheet, Text, Platform} from 'react-native'
 import RefreshListView,{RefreshState} from "../../components/RefreshListView"
 import testData from './data'
 import RecommendCell from "./RecommendCell"
-import {Api, fetchRequest} from "../../manage/api"
+import {fetchRequest} from "../../manage/api"
+import store from 'react-native-simple-store'
 
 class RecommendListView extends Component {
     state: {
@@ -15,7 +16,7 @@ class RecommendListView extends Component {
         super(props)
 
         this.state = {
-            dataList: [],
+            dataList: this.loadFromLocal(),
             refreshState: RefreshState.Idle,
         }
 
@@ -35,24 +36,19 @@ class RecommendListView extends Component {
     onFooterRefresh = () => {
         this.setState({refreshState: RefreshState.FooterRefreshing})
         this.fetchMoreDate()
-
-        // // 模拟网络请求
-        // setTimeout(() => {
-        //     //获取测试数据
-        //     let dataList = this.getTestList(false)
-        //
-        //     this.setState({
-        //         dataList: dataList,
-        //         refreshState: dataList.length > 50 ? RefreshState.NoMoreData : RefreshState.Idle,
-        //     })
-        // }, 2000)
     }
 
+    loadFromLocal = () => {
+        store.get('recommendList')
+            .then((res) => {
+                console.log('recommend_data_list')
+                    console.log(res)
+                    return res
+            })
+    }
     fetchData = () => {
         fetchRequest('games/recommend', 'GET').then(
             data => {
-                console.log('aaaa')
-
                 let newList = data.map((item) => {
                     return {
                         imageUrl: item.icon_url,
@@ -70,6 +66,8 @@ class RecommendListView extends Component {
                     dataList: newList,
                     refreshState: RefreshState.Idle,
                 })
+
+                store.update('recommendList', newList)
             }
         ).catch(
             err=>{
@@ -142,7 +140,8 @@ class RecommendListView extends Component {
 
     onPress = () => {
         const { navigate } = this.props.navigation;
-        navigate('Web');
+
+        navigate('Login');
     }
 
 
