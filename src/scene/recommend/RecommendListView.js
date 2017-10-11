@@ -141,7 +141,8 @@ class RecommendListView extends Component {
     onPress = () => {
         const { navigate } = this.props.navigation;
 
-        navigate('Login');
+        navigate('Photo')
+        // navigate('Login');
     }
 
 

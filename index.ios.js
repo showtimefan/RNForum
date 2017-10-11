@@ -5,11 +5,12 @@
  */
 
 import CategoryMainScene from './src/scene/category/CategoryMainScene'
-import PadMainScene from './src/scene/pad/PadMainScene'
 import ExploreMainScene from './src/scene/explore/ExploreMainScene'
 import RecommendMainScene from './src/scene/recommend/RecommendMainScene'
 import ForumMainScene from './src/scene/forum/ForumMainScene'
 import WebViewPage from './src/components/WebViewPage'
+import PhotoBrowserScene from './src/components/PhotoBrowserScene'
+
 import LoginScene from './src/scene/Login/LoginScene'
 import { StackNavigator, TabNavigator } from 'react-navigation';
 import React, { Component } from 'react';
@@ -28,7 +29,7 @@ const TabContainer = TabNavigator(
         Forum: { screen: ForumMainScene },
         Explore: { screen: ExploreMainScene },
         Category: { screen: CategoryMainScene },
-        TestWeb: {screen: WebDataTest}
+        TestWeb: {screen: PhotoBrowserScene}
     },
     {
         lazy: true,
@@ -78,7 +79,8 @@ const RNForum = StackNavigator(
             }
         },
         Web: { screen: WebViewPage },
-        Login: { screen: LoginScene }
+        Login: { screen: LoginScene },
+        Photo: {screen: PhotoBrowserScene}
     },
     {
         headerMode: 'screen',

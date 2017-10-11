@@ -5,7 +5,6 @@ import {
     View,
     TextInput,
     TouchableOpacity,
-    Alert,
 } from 'react-native';
 import Toast from 'react-native-easy-toast'
 import passport_fetch from '../../manage/passport_api'
@@ -53,7 +52,7 @@ class LoginScene extends Component {
         )
     }
 
-    //用户登录，获取token、
+    //获取用户信息
     fetchUserInfo = () => {
         passport_fetch('users/me', 'GET').then(
             () => {
