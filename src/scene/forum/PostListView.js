@@ -78,8 +78,8 @@ class PostListView extends Component {
                 nick_name:data.nick_name,
                 title: data.title,
                 summary: data.summary,
-                img_urls_1:data.img_urls[0]['img_src']['thumb'],
-                img_urls_2:data.img_urls[1]['img_src']['thumb'],
+                img_urls_1:data.img_urls[0]['img_src']['origin'],
+                img_urls_2:data.img_urls[1]['img_src']['origin'],
 
             }
         })
@@ -112,21 +112,21 @@ class PostListView extends Component {
     }
 
     renderCell = (info: Object ) => {
-        console.log('render cell')
-
         return <PostCell info={info.item} onPress={this.onPress} />
     }
 
     onPress = (info) => {
-        console.log('render cell')
+        let media = [{
+            photo: info.img_urls_1,
+        }, {
+            photo: info.img_urls_2
+        }]
 
-        const { navigate } = this.props.navigation;
-        // navigate('Web', {info:'http://clan.m.newgamer.com/m/posts/60000000053083'});
-        //  let url = ('http://clan.m.newgamer.com/m/posts/')+ (info.id).toString()
-        let postUrl  = ('http://clan.m.newgamer.com/m/posts/').concat(''+ info.id)
-        // let postUrl = 'http://clan.m.newgamer.com/m/posts/60000000053083'
-        navigate('Web', {postUrl:info.post_url});
+        const { navigate } = this.props.navigation
+        navigate('Photo', {media:media, index:0})
 
+        // let postUrl  = ('http://clan.m.newgamer.com/m/posts/').concat(''+ info.id)
+        // navigate('Web', {postUrl:info.post_url});
     }
 
     render() {

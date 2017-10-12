@@ -38,14 +38,17 @@ class RecommendListView extends Component {
         this.fetchMoreDate()
     }
 
-    loadFromLocal = () => {
-        store.get('recommendList')
-            .then((res) => {
-                console.log('recommend_data_list')
-                    console.log(res)
-                    return res
-            })
+    loadFromLocal = async () => {
+        let list= await storage.load({
+            key:'recommendList'
+        })
+
+        console.log(list)
+        this.setState({
+            dataList: list,
+        })
     }
+
     fetchData = () => {
         fetchRequest('games/recommend', 'GET').then(
             data => {
@@ -67,7 +70,13 @@ class RecommendListView extends Component {
                     refreshState: RefreshState.Idle,
                 })
 
-                store.update('recommendList', newList)
+                storage.save({
+                    key:'recommendList',
+                    data: newList,
+                    expires: null
+                })
+
+                // storage.update('recommendList', newList)
             }
         ).catch(
             err=>{
@@ -85,7 +94,6 @@ class RecommendListView extends Component {
         url = 'games/recommend?limit=20&offset=' + this.state.dataList.length
         fetchRequest(url, 'GET').then(
             data => {
-                console.log('bbbbb')
                 let newList = data.map((item) => {
                     return {
                         imageUrl: item.icon_url,
@@ -95,10 +103,6 @@ class RecommendListView extends Component {
                         price: item.price,
                     }
                 })
-                //
-                // for (let i = 0; i < newList.length; i++) {
-                //     newList[i].id =
-                // }
 
                 this.setState({
                     dataList: this.state.dataList.concat(newList),
@@ -139,17 +143,15 @@ class RecommendListView extends Component {
 
 
     onPress = () => {
-        const { navigate } = this.props.navigation;
-
-        navigate('Photo')
-        // navigate('Login');
+        const { navigate } = this.props.navigation
+        navigate('Login');
     }
 
 
     renderCell = (info: Object) => {
         console.log('render cell')
 
-        return <RecommendCell info={info.item}  onPress={this.onPress.bind(this)} />
+        return <RecommendCell info={info.item}  onPress={this.onPress} />
     }
 
     render() {
